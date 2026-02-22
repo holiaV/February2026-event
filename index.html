@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>格付けチェック</title>
+  <style>
+    body {
+      font-family: "游ゴシック体", "Yu Gothic", "Segoe UI", sans-serif;
+      background-color: #1a0f0f;
+      color: #f5e8c7;
+      padding: 2em;
+      line-height: 1.8;
+    }
+    .main-title {
+      font-size: 2.4em;
+      color: #ffd700;
+      text-shadow: 2px 2px 8px #a87b00, 0 0 10px #000;
+      margin: 0;
+      border-bottom: 3px double #b68c2b;
+      padding-bottom: 0.2em;
+    }
+    .sub-title {
+      font-size: 1.3em;
+      color: #ffdf80;
+      margin: 0.5em 0 1.5em;
+      text-shadow: 1px 1px 5px #000;
+    }
+    .section {
+      background-color: #2b1c1c; 
+      border-radius: 10px;
+      border: 2px solid #b68c2b;
+      padding: 1em 1.5em;
+      margin-bottom: 2em;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    }
+    h2 {
+      color: #ffcc33;
+      border-bottom: 2px solid #b68c2b;
+      padding-bottom: 0.3em;
+      margin-bottom: 0.8em;
+      text-shadow: 1px 1px 4px #000;
+    }
+    ul {
+      list-style-type: "◆ ";
+      padding-left: 1.5em;
+    }
+    table {
+      border-collapse: collapse;
+      margin: 1em 0;
+      width: 100%;
+      max-width: 700px;
+      background-color: #1f1313;
+      color: #f5e8c7;
+    }
+    th, td {
+      border: 1px solid #b68c2b;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #3a2424;
+      color: #ffd700;
+    }
+    .accent {
+      color: #e03e3e;
+      font-weight: bold;
+      text-shadow: 1px 1px 5px #000;
+    }
+    .note {
+      font-style: italic;
+      color: #e0cf99;
+      margin-top: 0.5em;
+    }
+    .large {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    .expansion-title {
+      font-size: 2.8em;
+      font-weight: bold;
+      color: #ffcc33;
+      display: inline-block;
+      margin: 18px 0;
+      text-align: left;
+      width: 100%;
+      text-shadow: 2px 2px 8px #000, 0 0 12px #b68c2b;
+    }
+    .a-realm-reborn {
+      font-family: 'Georgia', serif;
+      color: #e91e63;
+      text-shadow: 0 0 8px rgba(233, 30, 99, 0.5), 2px 2px 4px #000;
+      letter-spacing: 2px;
+      }
+    .heavensward {
+      font-family: 'Times New Roman', serif;
+      color: #3f51b5;
+      text-shadow: 0 0 12px rgba(63, 81, 181, 0.6), 2px 2px 6px #000;
+      font-style: italic;
+      }
+    .stormblood {
+      font-family: 'Impact', sans-serif;
+      color: #ff7043;
+      text-shadow: 0 0 6px rgba(255, 112, 67, 0.7), 3px 3px 6px #330000;
+      }
+    .shadowbringers {
+      font-family: 'Trajan Pro', serif;
+      color: #ccbfff;
+      text-shadow: 0 0 14px rgba(80, 40, 150, 0.9), 3px 3px 8px #000;
+      letter-spacing: 3px;
+      }
+    .endwalker {
+      font-family: 'Garamond', serif;
+      color: #ffd54f;
+      text-shadow: 0 0 10px rgba(255, 213, 79, 0.7), 2px 2px 6px #333;
+      }
+    .dawnbreak {
+      font-family: 'Palatino Linotype', serif;
+      color: #ffeb3b;
+      text-shadow: 0 0 15px rgba(255, 235, 59, 0.8), 3px 3px 7px #8a6d00;
+      letter-spacing: 1px;
+      }
+    .question-card {
+        margin-bottom: 2em;
+        padding: 1em;
+        background-color: #2a2a40;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .question-card h2 {
+        font-size: 1.25em;
+        color: #3498db;
+        margin-bottom: 1em;
+        text-shadow: 1px 1px 3px #111;
+    }
+    .question-card .main-image {
+        width: 75%;
+        max-width: 1920px;
+        height: auto;
+        margin-bottom: 1em;
+    }
+    .question-card ul.options {
+        list-style: none;
+        padding: 0;
+    }
+    .question-card ul.options li {
+        background-color: #3a3a5a;
+        border: 2px solid #3498db;
+        border-radius: 10px;
+        padding: 0.5em;
+        width: auto;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        margin-bottom: 1em;
+    }
+    .question-card ul.options li img {
+        width: 64px;
+        height: 64px;
+        display: block;
+        margin-bottom: 0.5em;
+    }
+    .question-card ul.options li span {
+        display: block;
+        font-size: 0.9em;
+        color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="main-title">★光の戦士格付けチェック</h1>
+  <h2 class="sub-title">～正解を見極め、一流冒険者の名を維持し続けよ～</h2>
+
+  <div class="section">
+    <h2>◆ 目的 ⭐</h2>
+    <ul>
+    <li>エオルゼアに関する二択問題を外さずに当て続ける<br>
+    <img src="ペストリーフィッシュ.png" alt="ペストリーフィッシュ" style="width:75px; margin-top: 0.5em;">
+    </li>
+  </div>
+
+  <div class="section">
+    <h2>◆ 参加資格 ✋</h2>
+    <ul>
+      <li>だれでも参加できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>◆ 勝利条件 👑</h2>
+    <ul>
+      <li>チームメンバーのスコア合計値が高いチームが勝利となります。</li>
+      <li>スコアは保たれた格式により変動します。</li>
+    </ul>
+  </div>
+  
+  <div class="section">
+    <h2>◆ ミラプリテーマ👚</h2>
+    <ol>
+      今回のテーマは…<br>
+      <div class="expansion-title christmas">"一流"の名に恥じない姿</div>
+      です。<br>
+      元ネタよろしくフォーマルな服装も良し、光の戦士らしく格式高そうな鎧姿も良し。<br>
+      "一流"という言葉に相応しい姿であればどんなミラプリでも大丈夫です。<br>
+      <div class="expansion-title a-realm-reborn">評価項目</div>
+      <div class="evaluation-item">💎 高級感</div>
+      <img src="テーマ１.png" alt="テーマ" style="width:600px; margin-top: 0.5em;"><br>
+      <div class="evaluation-item">🎩 上品さ</div>
+      <img src="テーマ２.png" alt="テーマ" style="width:600px; margin-top: 0.5em;"><br>
+      <div class="evaluation-item">🧐 説得力</div>
+      <img src="テーマ３.png" alt="テーマ" style="width:600px; margin-top: 0.5em;"><br>
+      <br>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2>◆ チーム分け 🧑‍🤝‍🧑</h2>
+    <p><strong>ダイスで完全ランダム</strong><br>
+    「/random」コマンドで出た数値の昇順で決定する。<br>
+    例：900 800 700 600 → 900＆800チーム、700＆600チーム</p>
+
+    <p><strong>参加人数が素数になったら？</strong><br>
+    参加人数が素数になった場合、「2026GACKT」枠を無理やり追加します。<br>
+    ソロPTはその名の通り、チーム分けされずに独りで戦う「2026GACKT」になります。<br>
+   「2026GACKT」は当然スコアで不利になってしまう為、最終スコアに参加者の中で中央値となる格付けのスコアを追加します。<br>
+    （※例えば７人参加者がいて、一流、普通、普通、二流、二流、三流、三流 だった場合、二流のスコアが付与されます。）<br>
+    勝率は低いかもですが、もし優勝出来れば賞金は独り占めすることが出来ます。<br><br>
+
+    我こそはという方は是非「2026GACKT」に立候補してみてください。<br>
+    希望者がいなければダイスの結果が一番低かった人がこの枠になります。<br>
+    運も持ち合わせてこそ一流…なのかもしれません。<br>
+
+    <p><strong>参加者人数とチーム構成：</strong><br>
+      4名：2 vs 2<br>
+      5名：2 vs 2 vs <span class="solo">1</span><br>
+      6名：2 vs 2 vs 2<br>
+      7名：2 vs 2 vs 2 vs <span class="solo">1</span><br>
+      8名：2 vs 2 vs 2 vs 2<br>
+      9名：3 vs 3 vs 3<br>
+      10名：2 vs 2 vs 2 vs 2 vs 2<br>
+      11名：2 vs 2 vs 2 vs 2 vs 2 vs <span class="solo">1</span><br>
+      12名：2 vs 2 vs 2 vs 2 vs 2 vs 2</p>
+  </div>
+  
+  <div class="section">
+    <h2>◆ ゲームの流れ🔄</h2>
+    <ul>
+      <li>
+          <div class="large">進行</div>
+          <img src="進行１.png" alt="進行" style="width:600px; margin-top: 0.5em;"><br>
+          <img src="進行２.png" alt="進行" style="width:600px; margin-top: 0.5em;"><br>
+          <img src="進行３.png" alt="進行" style="width:600px; margin-top: 0.5em;"><br>
+          <img src="進行４.png" alt="進行" style="width:600px; margin-top: 0.5em;"><br>
+          <img src="進行５.png" alt="進行" style="width:600px; margin-top: 0.5em;"><br>
+          <img src="進行６.png" alt="進行" style="width:600px; margin-top: 0.5em;"><br>
+          この流れを６問分繰り返します。
+      </li>
+  </div>
+  
+  <div class="section">
+    <h2>◆ スコアについて📝</h2>
+    <ul>
+          <img src="スコアについて１.png" alt="スコアについて" style="width:600px; margin-top: 0.5em;"><br>
+          <img src="スコアについて２.png" alt="スコアについて" style="width:600px; margin-top: 0.5em;"><br>
+  </div>
+
+  <div class="section">
+    <h2>◆ チェック項目一覧(全６問)💭</h2>
+    <ul style="list-style: none; padding: 0; font-family: 'Segoe UI', sans-serif;">
+          <div class="large">🗺風景</div>
+          <img src="チェック項目１.png" alt="チェック項目" style="width:600px; margin-top: 0.5em;"><br>
+          <div class="large">👗ミラプリ(染色)</div>
+          <img src="チェック項目２.png" alt="チェック項目" style="width:600px; margin-top: 0.5em;"><br>
+          <div class="large">👗ミラプリ(ジョブ)</div>
+          <img src="チェック項目３.png" alt="チェック項目" style="width:600px; margin-top: 0.5em;"><br>
+          <div class="large">🎶ＢＧＭ</div>
+          <img src="チェック項目４.png" alt="チェック項目" style="width:600px; margin-top: 0.5em;"><br>
+          <div class="large">⚔戦闘(ギミック)</div>
+          <img src="チェック項目５.png" alt="チェック項目" style="width:600px; margin-top: 0.5em;"><br>
+          <div class="large">⚔戦闘(スキル)</div>
+          <img src="チェック項目６.png" alt="チェック項目" style="width:600px; margin-top: 0.5em;"><br>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>◆ その他ルール及び補足事項 📜</h2>
+    <ul>
+      <li>
+          <div class="large">Ｃの部屋及びGACKT部屋について</div>
+          <img src="その他１.png" alt="その他" style="width:600px; margin-top: 0.5em;"><br>
+      </li>
+      <li>
+          <div class="large">格式ダウンによる待遇の変化について</div>
+          <img src="その他２.png" alt="その他" style="width:600px; margin-top: 0.5em;"><br>
+      </li>
+      <li>
+          <div class="large">赤玉になったらどうなるの</div>
+          <img src="その他３.png" alt="その他" style="width:600px; margin-top: 0.5em;"><br>
+      </li>
+      <li>
+          <div class="large">イベント中の移動について</div>
+          <img src="その他４.png" alt="その他" style="width:600px; margin-top: 0.5em;"><br>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="section">
+    <h2>◆ 恒例のスクリーンショットについて 📸</h2>
+    <ul>
+      <li>
+          <div class="large">メインテーマ</div>
+          いつものやつです。<br>
+          準備できる方はミラプリとスクショ両方事前準備を、当日カメラマンにお任せの方はミラプリだけ準備をお願いします。<br>
+      </li>
+    </ul>
+  </div>
+
+</body>
+</html>
